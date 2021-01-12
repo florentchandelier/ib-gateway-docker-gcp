@@ -1,6 +1,7 @@
 FROM ubuntu:20.04
 
-LABEL maintainer="Dimitri Vasdekis <dvasdekis@gmail.com>"
+LABEL 	original.maintainer="Dimitri Vasdekis <dvasdekis@gmail.com>" \
+	current.maintainer="florentchandelier"
 
 # Set Env vars
 ENV DEBIAN_FRONTEND=noninteractive
@@ -47,6 +48,10 @@ COPY ./ib/jts.ini /root/Jts/jts.ini
 # Overwrite vmoptions file
 RUN rm -f /root/Jts/ibgateway/978/ibgateway.vmoptions
 COPY ./ibgateway.vmoptions /root/Jts/ibgateway/978/ibgateway.vmoptions
+
+# Auto VNC Configuration
+RUN mkdir ~/.vnc
+RUN /usr/bin/x11vnc -storepasswd 1234 /etc/vncpwd
 
 # Install Python requirements
 RUN pip3 install supervisor

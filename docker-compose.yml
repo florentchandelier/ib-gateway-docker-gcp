@@ -2,7 +2,7 @@ version: '3.4'
 services:
   tws:
     build: .
-    #image: dvasdekis/ib-gateway-docker:v978
+    container_name: tws
     volumes:
       - ./ib/IBController.ini:/root/IBController/IBController.ini
       - ./ib/jts.ini:/root/Jts/jts.ini
