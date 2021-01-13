@@ -3,6 +3,7 @@ services:
   tws:
     build: .
     container_name: tws
+    image: tws:latest
     volumes:
       - ./ib/IBController.ini:/root/IBController/IBController.ini
       - ./ib/jts.ini:/root/Jts/jts.ini
@@ -14,11 +15,11 @@ services:
       - FIXPASSWORD=
       - XVFB_ARGS="-ac -screen 0 1024x768x16 +extension RANDR"
     restart: always
-#   Uncomment the below to use VNC
     ports:
       - 5901:5900
   test:
     build: tests/ib_insync
+    container_name: test.ib_insync
     environment:
       - IB_GATEWAY_URLNAME=tws
       - IB_GATEWAY_URLPORT=4004
